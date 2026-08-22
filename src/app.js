@@ -8,7 +8,11 @@ const connectMongo = require("./config/mongo");
 
 const app = express();
 
+// CRITICAL: Trust Vercel's proxy so rate-limiting sees the real user IP
+app.set("trust proxy", 1);
+
 app.use(helmet());
+// ... rest of the file stays the same ...
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : "*",
